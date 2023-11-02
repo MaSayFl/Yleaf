@@ -185,6 +185,24 @@ def make_dendrogram(
     dot.render(output_file, view=False)
     os.remove(output_file)
 
+def find_path_to_root(tree, node_label):
+    current_node = node_label
+    path = [current_node]
+    while current_node != 'ROOT (Y-Chromosome "Adam")':
+        found_parent = False
+        for parent, children in tree.items():
+            if current_node in children:
+                current_node = parent
+                path.append(parent)
+                found_parent = True
+                break
+        if not found_parent:
+            # If no parent is found, break the loop to avoid an infinite loop
+            break
+    if path[-1] == 'ROOT (Y-Chromosome "Adam")':
+        return path[::-1]  # Reverse the path to get the correct order
+    else:
+        return []
 
 if __name__ == '__main__':
     main()
