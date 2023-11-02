@@ -39,6 +39,10 @@ def main(namespace: argparse.Namespace = None):
         edge_mapping = collapse_tree_dict(partial_haplogroup_dict, sample_mapping)
     else:
         edge_mapping = {}
+    path_to_root = find_path_to_root(partial_haplogroup_dict, *sample_mapping.keys())
+    with open('path.txt', 'w') as f:
+        for h in path_to_root:
+            f.write(h+"\n")
     make_dendrogram(partial_haplogroup_dict, sample_mapping, edge_mapping, namespace.outfile)
     LOG.info("Finished drawing haplogroups")
 
