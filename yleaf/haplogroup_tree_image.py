@@ -204,7 +204,7 @@ def find_path_to_root(tree, node_label):
             # If no parent is found, break the loop to avoid an infinite loop
             break
     if path[-1] == 'ROOT (Y-Chromosome "Adam")':
-        return path[::-1]  # Reverse the path to get the correct order
+        return path  # Reverse the path to get the correct order
     else:
         return []
 
